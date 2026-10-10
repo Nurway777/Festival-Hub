@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Festival Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#0b0a14;--bg2:#14122a;--tx:#f3f1ff;--mu:#9a96b8;--gl:rgba(255,255,255,.06);--bd:rgba(255,255,255,.1);--a:#8b5cf6;--b:#ec4899;--c:#22d3ee;--g:linear-gradient(135deg,#8b5cf6,#ec4899 60%,#f59e0b);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root:not([data-theme="dark"]):not([data-theme="light"]){}
+
+
+:root[data-theme="light"]{--bg:#f6f4ff;--bg2:#fff;--tx:#1b1740;--mu:#6a6590;--gl:rgba(255,255,255,.7);--bd:rgba(80,60,160,.15)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif;min-height:100vh;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;width:50vmax;height:50vmax;border-radius:50%;filter:blur(90px);opacity:.28;z-index:-1;animation:fl 18s ease-in-out infinite alternate}
+body:before{background:var(--a);top:-20vmax;left:-15vmax}body:after{background:var(--b);bottom:-25vmax;right:-15vmax;animation-delay:-9s}
+@keyframes fl{to{transform:translate(8vmax,6vmax) scale(1.15)}}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;margin:0;letter-spacing:-.01em}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;align-items:center;gap:6px;padding:10px 18px;background:var(--gl);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);overflow-x:auto}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;margin-right:auto;white-space:nowrap}
+.brand img{width:32px;height:32px;border-radius:9px;object-fit:cover}
+.tab{background:none;border:0;color:var(--mu);padding:8px 13px;border-radius:99px;cursor:pointer;font:inherit;white-space:nowrap;transition:.2s}
+.tab:hover{color:var(--tx);background:var(--gl)}.tab.on{background:var(--g);color:#fff}
+main{max-width:1100px;margin:0 auto;padding:22px 18px 70px;animation:in .4s}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.hero{position:relative;border-radius:28px;overflow:hidden;padding:clamp(34px,8vw,90px) clamp(20px,5vw,60px);border:1px solid var(--bd);background:var(--gl);backdrop-filter:blur(14px);text-align:center;background-size:cover;background-position:center}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,10,20,.35),rgba(11,10,20,.8))}
+.hero>*{position:relative}.hero.noimg:before{background:none}
+.hero h1{font-size:clamp(34px,7vw,68px);line-height:1.05;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:14px}
+.hero p{max-width:600px;margin:0 auto 24px;color:var(--mu);font-size:17px}
+.hero.img p{color:#e8e5ff}
+.btn{border:0;cursor:pointer;font:inherit;font-weight:600;padding:10px 20px;border-radius:99px;color:#fff;background:var(--g);transition:.2s;box-shadow:0 8px 24px -8px var(--a)}
+.btn:hover{transform:translateY(-2px)}.btn.o{background:var(--gl);color:var(--tx);border:1px solid var(--bd);box-shadow:none}
+.btn.d{background:#e11d48}.btn.s{padding:6px 13px;font-size:13px}
+.stats,.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));margin:20px 0}
+.card{background:var(--gl);border:1px solid var(--bd);border-radius:20px;padding:18px;backdrop-filter:blur(12px);transition:.25s}
+.card:hover{transform:translateY(-4px);border-color:var(--a);box-shadow:0 20px 50px -20px var(--a),0 0 0 1px rgba(139,92,246,.25)}
+.btn{position:relative;overflow:hidden}.btn:after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transition:left .6s}.btn:hover:after{left:140%}
+h2{position:relative;display:inline-block}h2:after{content:"";display:block;height:3px;width:46%;margin-top:4px;border-radius:9px;background:var(--g)}
+.card .im{width:calc(100% + 36px);margin:-18px -18px 12px;height:150px;object-fit:cover;border-radius:20px 20px 0 0;display:block}
+.stat b{font-size:30px;display:block;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}.stat span{color:var(--mu);font-size:13px}
+.sec{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:26px 0 6px}
+.mu{color:var(--mu);font-size:13px}.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;background:var(--gl);border:1px solid var(--bd);margin:2px 4px 2px 0}
+.pill.ok{color:#34d399}.pill.no{color:#fb7185}
+.lb{display:flex;align-items:center;gap:14px;padding:12px 16px;margin:8px 0}
+.rk{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-weight:800;background:var(--gl);border:1px solid var(--bd);flex:none}
+.r1 .rk{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#3b2400}.r2 .rk{background:linear-gradient(135deg,#e5e7eb,#9ca3af);color:#222}.r3 .rk{background:linear-gradient(135deg,#f59e0b,#b45309);color:#fff}
+.r1{border-color:#fbbf24;box-shadow:0 0 30px -10px #fbbf24}
+.av{width:44px;height:44px;border-radius:50%;background:var(--g);display:grid;place-items:center;font-weight:700;color:#fff;object-fit:cover;flex:none}
+.pts{margin-left:auto;font-weight:800;font-size:20px}
+input,select,textarea{width:100%;background:var(--bg2);color:var(--tx);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;font:inherit;margin-top:4px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--a)}
+label{display:block;font-size:13px;color:var(--mu);margin-bottom:12px}label.ck{display:flex;gap:8px;align-items:center}label.ck input{width:auto;margin:0}
+.bar{display:flex;gap:10px;flex-wrap:wrap}.bar input,.bar select{flex:1;min-width:140px;margin:0}
+.md{position:fixed;inset:0;z-index:50;background:rgba(5,4,12,.7);backdrop-filter:blur(6px);display:grid;place-items:center;padding:16px;animation:in .2s}
+.md>div{background:var(--bg2);border:1px solid var(--bd);border-radius:24px;padding:24px;width:min(520px,100%);max-height:90vh;overflow:auto}
+.md h3{margin-bottom:14px}.row{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+#toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:99;display:flex;flex-direction:column;gap:8px}
+.t{background:var(--bg2);border:1px solid var(--bd);padding:10px 18px;border-radius:14px;animation:in .3s;box-shadow:0 10px 30px rgba(0,0,0,.4)}.t.e{border-color:#e11d48}
+.empty{text-align:center;padding:40px 20px;color:var(--mu);border:1px dashed var(--bd);border-radius:20px;margin:14px 0}
+.sk{height:90px;border-radius:20px;background:linear-gradient(90deg,var(--gl),var(--bd),var(--gl));background-size:200% 100%;animation:sh 1.2s infinite}@keyframes sh{to{background-position:-200% 0}}
+.prev{max-width:100%;max-height:140px;border-radius:12px;margin-top:6px}
+.g .card{padding:0;overflow:hidden}.g .im{margin:0;width:100%;height:190px;border-radius:0}.g .cap{padding:12px 16px}
+.act{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+footer{text-align:center;color:var(--mu);padding:30px 18px;font-size:13px}
+#splash{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;padding:20px;transition:opacity .7s,visibility .7s}
+#splash.out{opacity:0;visibility:hidden}
+#splash img{width:clamp(120px,30vw,180px);height:clamp(120px,30vw,180px);object-fit:contain;border-radius:28px;animation:pop 1s cubic-bezier(.2,1.4,.4,1) both,bob 3s 1s ease-in-out infinite;filter:drop-shadow(0 18px 40px var(--a))}
+#splash h1{font-size:clamp(30px,8vw,64px);background:linear-gradient(90deg,#8b5cf6,#ec4899,#f59e0b,#8b5cf6);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:rise .9s .3s both,flow 3s linear infinite}
+#splash i{width:140px;height:3px;border-radius:9px;background:var(--g);animation:ld 2.2s ease-out both}
+@keyframes pop{from{opacity:0;transform:scale(.5) rotate(-8deg)}}@keyframes bob{50%{transform:translateY(-10px)}}
+@keyframes rise{from{opacity:0;transform:translateY(24px);letter-spacing:.3em}}@keyframes flow{to{background-position:-300% 0}}@keyframes ld{from{width:0}}
+@media(max-width:600px){nav{padding:8px 10px}.lb{padding:10px}}
+</style></head><body>
+<div id="splash"><div id="sp"></div><i></i></div><canvas id="bg"></canvas><nav id="nav"></nav><main id="app"><div class="sk"></div></main><footer id="ft"><div class="card" style="max-width:520px;margin:0 auto;padding:16px 20px"><b>Want to buy this website?</b><div class="mu" style="margin-top:4px">Contact with owner</div><div style="margin-top:8px">✉️ <span style="color:var(--c);user-select:all">wayall171@gmail.com</span> <button class="btn o s" onclick="cp('wayall171@gmail.com')">Copy</button></div></div></footer><div id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=(s,e=document)=>e.querySelector(s),esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let db=null,assets=null,admin=false,isEd=false,tab="home",S={settings:{},students:[],points:[],events:[],gallery:[],news:[],cats:[],teams:[],cands:[]},ready=false,flt={};
+const COLS=["students","points","events","gallery","news","cats","teams","cands","settings"];
+function toast(m,e){const d=document.createElement("div");d.className="t"+(e?" e":"");d.textContent=m;$("#toast").append(d);setTimeout(()=>d.remove(),3200)}
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const today=()=>new Date().toISOString().slice(0,10);
+const img=id=>id?(String(id).startsWith("data:image/")?id:`/_blob/${esc(id)}`):"";
+async function save(col,id,data,act){try{await db.collection(col).doc(id).set({...data,updated:Date.now()});log(act)}catch(e){toast(e.message||"Save failed",1)}}
+async function del(col,id,act){try{await db.collection(col).doc(id).delete();log(act)}catch(e){toast(e.message||"Delete failed",1)}}
+function log(a){if(!a)return;toast(a);db.collection("logs").doc(uid()).set({a,t:Date.now()}).catch(()=>{})}
+function confirmBox(msg,fn){modal(`<h3>Please confirm</h3><p>${esc(msg)}</p><div class="row"><button class="btn o" data-x>Cancel</button><button class="btn d" id="cf">Confirm Delete</button></div>`);$("#cf").onclick=()=>{closeM();fn()}}
+function modal(h){closeM();const m=document.createElement("div");m.className="md";m.innerHTML=`<div>${h}</div>`;m.onclick=e=>{if(e.target===m||e.target.dataset.x!==undefined)closeM()};document.body.append(m)}
+function closeM(){document.querySelectorAll(".md").forEach(m=>m.remove())}
+async function shrink(f){const b=await createImageBitmap(f);let sc=Math.min(1,3000/Math.max(b.width,b.height)),bl;const t=f.type==="image/png"?"image/png":"image/jpeg";do{const c=document.createElement("canvas");c.width=Math.max(1,b.width*sc|0);c.height=Math.max(1,b.height*sc|0);c.getContext("2d").drawImage(b,0,0,c.width,c.height);bl=await new Promise(r=>c.toBlob(r,t,.9));sc*=.75}while(bl&&bl.size>1.9e7&&sc>.05);return new File([bl],f.name,{type:t})}
+async function up(file){if(!assets)throw Error("Uploads unavailable");if(!/^image\/(png|jpe?g|webp|svg\+xml)$/.test(file.type))throw Error("Use PNG, JPG, WEBP or SVG");if(file.size>8e6&&file.type!=="image/svg+xml"){try{file=await shrink(file)}catch(e){throw Error("Could not process this image")}}if(file.size>2e7)throw Error("Image too large (max 20 MB)");return (await assets.upload(file)).id}
+// generic form
+function form(title,fields,val,onSave,multi){
+ val={...val};
+ const f=fields.map(x=>{const v=val[x.k]??"";let i;
+  if(x.t==="area")i=`<textarea name="${x.k}" rows="3">${esc(v)}</textarea>`;
+  else if(x.t==="sel")i=`<select name="${x.k}">${x.o().map(o=>`<option value="${esc(o[0])}" ${o[0]==v?"selected":""}>${esc(o[1])}</option>`)}</select>`;
+  else if(x.t==="img")i=`<input type="file" name="${x.k}" accept="image/png,image/jpeg,image/webp,image/svg+xml" ${multi&&x.k==="img"?"multiple":""}>${v?`<img class="prev cur" src="${img(v)}">`:""}<img class="prev" hidden>${v&&x.rm?`<input type="hidden" name="rm_${x.k}" value=""><button type="button" class="btn d s" style="margin-top:8px" onclick="rmImg(this)">🗑 Delete this image</button><span class="mu rmn" hidden> Image will be deleted when you press Save. You can also choose a new image above.</span>`:""}`;
+  else if(x.t==="ck")return `<label class="ck"><input type="checkbox" name="${x.k}" ${v?"checked":""}> ${x.l}</label>`;
+  else i=`<input name="${x.k}" type="${x.t||"text"}" value="${esc(v)}" ${x.r?"required":""}>`;
+  return `<label>${x.l}${x.r?" *":""}${i}</label>`}).join("");
+ modal(`<h3>${title}</h3><form id="fm">${f}<div class="row"><button type="button" class="btn o" data-x>Cancel</button><button class="btn" id="sv">Save</button></div></form>`);
+ $("#fm").querySelectorAll("input[type=file]").forEach(i=>i.onchange=()=>{const p=i.parentNode.querySelector("img[hidden]");if(i.files[0]&&p){p.src=URL.createObjectURL(i.files[0]);p.hidden=false}});
+ $("#fm").onsubmit=async e=>{e.preventDefault();const b=$("#sv");b.disabled=true;b.textContent="Saving…";const o={...val};
+  try{for(const x of fields){const el=$("#fm").elements[x.k];if(x.t==="img"){const rm=$("#fm").elements["rm_"+x.k];if(rm&&rm.value==="1"&&!el.files.length){if(o[x.k]&&assets)assets.delete(o[x.k]).catch(()=>{});o[x.k]=""}else if(el.files.length){if(multi){o._files=[...el.files]}else{if(x.rm&&o[x.k]&&assets)assets.delete(o[x.k]).catch(()=>{});o[x.k]=await up(el.files[0])}}}else if(x.t==="ck")o[x.k]=el.checked;else o[x.k]=x.t==="number"?Number(el.value):el.value}
+   await onSave(o,b);closeM()}catch(er){toast(er.message,1);b.disabled=false;b.textContent="Save"}}}
+const teamOpts=()=>[["","— no team —"],...S.teams.map(c=>[c.name,c.name])];
+const catOpts=()=>[["","— none —"],...S.cats.map(c=>[c.name,c.name])];
+const stuOpts=()=>S.students.filter(s=>s.status!=="deleted").map(s=>[s.id,`${s.name} (${s.sid||"-"})`]);
+const E={
+ students:{l:"Student",f:[{k:"name",l:"Name",r:1},{k:"sid",l:"Student ID",r:1},{k:"user",l:"Username / access ID"},{k:"team",l:"Team",t:"sel",o:teamOpts},{k:"cls",l:"Class"},{k:"sec",l:"Section"},{k:"photo",l:"Profile image",t:"img",rm:1},{k:"status",l:"Status",t:"sel",o:()=>[["active","Active"],["inactive","Inactive"]]}]},
+ events:{l:"Event",f:[{k:"name",l:"Event name",r:1},{k:"cat",l:"Category",t:"sel",o:catOpts},{k:"desc",l:"Description",t:"area"},{k:"date",l:"Date",t:"date"},{k:"st",l:"Start time",t:"time"},{k:"en",l:"End time",t:"time"},{k:"venue",l:"Venue"},{k:"max",l:"Max participants",t:"number"},{k:"pts",l:"Points",t:"number"},{k:"img",l:"Event image",t:"img"},{k:"pub",l:"Published",t:"ck"}]},
+ news:{l:"Announcement",f:[{k:"title",l:"Title",r:1},{k:"desc",l:"Description",t:"area"},{k:"date",l:"Date",t:"date"},{k:"prio",l:"Priority",t:"sel",o:()=>[["normal","Normal"],["high","High"],["low","Low"]]},{k:"img",l:"Image",t:"img"},{k:"pub",l:"Published",t:"ck"}]},
+ gallery:{l:"Gallery image",f:[{k:"title",l:"Title"},{k:"cap",l:"Caption"},{k:"desc",l:"Description",t:"area"},{k:"cat",l:"Category",t:"sel",o:catOpts},{k:"date",l:"Date",t:"date"},{k:"img",l:"Image file",t:"img"},{k:"pub",l:"Published",t:"ck"}]},
+ teams:{l:"Team",f:[{k:"name",l:"Team name",r:1}]},
+ cats:{l:"Category",f:[{k:"name",l:"Category name",r:1}]},
+ points:{l:"Point transaction",f:[{k:"stu",l:"Student",t:"sel",o:stuOpts},{k:"pts",l:"Points",t:"number",r:1},{k:"reason",l:"Reason / event",r:1},{k:"desc",l:"Description",t:"area"},{k:"date",l:"Date",t:"date"}]}
+};
+function edit(col,rec){
+ const c=E[col],isNew=!rec;rec=rec||{id:uid(),date:today(),pub:true,status:"active",pts:0};
+ if(col==="students"&&!isNew){}
+ form((isNew?"Add ":"Edit ")+c.l,c.f,rec,async o=>{
+  if(col==="students"&&S.students.some(s=>s.id!==o.id&&s.sid&&s.sid===o.sid))throw Error("Duplicate Student ID");
+  if(col==="points"&&!o.stu)throw Error("Choose a student");
+  if(col==="gallery"&&isNew&&!o.img&&!(o._files&&o._files.length))throw Error("Choose an image file");
+  if(col==="teams"){if(S.teams.some(t=>t.id!==o.id&&t.name===o.name))throw Error("Team already exists");if(!isNew&&rec.name!==o.name)for(const st of S.students.filter(x=>x.team===rec.name))await save("students",st.id,{...st,team:o.name})}
+  const files=o._files;delete o._files;
+  if(col==="gallery"&&isNew&&files){const ids=[];for(let i=0;i<files.length;i++){const b=$("#sv");b.textContent=`Uploading ${i+1}/${files.length}…`;const im=await up(files[i]);await save("gallery",uid(),{...o,img:im,title:o.title||files[i].name.replace(/\.[^.]+$/,"")},i===files.length-1?`${files.length} image(s) uploaded`:null)}return}
+  if(files&&files[0])o.img=await up(files[0]);
+  await save(col,o.id,o,(isNew?"Created ":"Updated ")+c.l.toLowerCase())
+ },col==="gallery"&&isNew)}
+function ask(col,r,label){confirmBox(col==="students"?"Are you sure you want to permanently delete this student? (They will be moved to Archived.)":`Delete this ${E[col].l.toLowerCase()}?`,async()=>{
+ if(col==="students")await save("students",r.id,{...r,status:"deleted"},"Student archived");
+ else{if(col==="events")for(const c of S.cands.filter(c=>c.ev===r.id))await del("cands",c.id);const arr=S[col];S[col]=arr.filter(x=>x.id!==r.id);render(1);try{await db.collection(col).doc(r.id).delete();log("Deleted "+E[col].l.toLowerCase())}catch(e){S[col]=arr;render(1);toast("Could not delete: "+(e.message||"no permission — open this page signed in as the owner"),1);return}if(r.img&&assets&&col==="gallery")assets.delete(r.img).catch(()=>{})}})}
+// data
+const total=id=>S.points.filter(p=>p.stu===id).reduce((a,p)=>a+(+p.pts||0),0);
+function board(){return S.students.filter(s=>s.status==="active").map(s=>({...s,total:total(s.id)})).sort((a,b)=>b.total-a.total||(a.name||"").localeCompare(b.name||"")||a.id.localeCompare(b.id)).map((s,i)=>({...s,rank:i+1}))}
+const av=s=>s.photo?`<img class="av" src="${img(s.photo)}">`:`<div class="av">${esc((s.name||"?")[0].toUpperCase())}</div>`;
+const sName=id=>(S.students.find(s=>s.id===id)||{}).name||"Removed student";
+const empty=(t,b)=>`<div class="empty">${t}${b&&admin?`<br><br>${b}`:""}</div>`;
+const pubOnly=a=>admin?a:a.filter(x=>x.pub);
+const addBtn=(c,t)=>admin?`<button class="btn s" onclick="edit('${c}')">+ ${t||"Add"}</button>`:"";
+const acts=(c,id)=>admin?`<div class="act"><button class="btn o s" onclick="edit('${c}',S['${c}'].find(x=>x.id==='${id}'))">Edit</button><button class="btn d s" onclick="ask('${c}',S['${c}'].find(x=>x.id==='${id}'))">Delete</button></div>`:"";
+const search=(ph)=>`<div class="bar"><input id="q" placeholder="${ph}" value="${esc(flt.q||"")}" oninput="flt.q=this.value;render(1)"></div>`;
+const qm=(o,keys)=>!flt.q||keys.some(k=>String(o[k]??"").toLowerCase().includes(flt.q.toLowerCase()));
+// views
+const V={
+ home(){const s=S.settings,b=board(),top=b[0];
+  return `<div style="text-align:center;padding:30px 0 6px">${s.banner?`<img src="${img(s.banner)}" style="width:100%;aspect-ratio:16/6;min-height:150px;object-fit:cover;object-position:center;display:block;border-radius:26px;border:1px solid var(--bd);margin-bottom:18px;box-shadow:0 20px 60px -20px var(--a)">`:""}<h1 style="font-size:clamp(32px,7vw,60px);background:linear-gradient(90deg,#8b5cf6,#ec4899,#f59e0b,#22d3ee,#8b5cf6);background-size:300% 100%;animation:flow 7s linear infinite;-webkit-background-clip:text;background-clip:text;color:transparent">${esc(s.name||(admin?"Set your festival name in Settings":"Welcome"))}</h1></div>
+  <div class="stats"><div class="card stat"><b>${S.students.filter(x=>x.status==="active").length}</b><span>Participants</span></div><div class="card stat"><b>${S.events.filter(x=>admin||x.pub).length}</b><span>Events</span></div><div class="card stat"><b>${top?esc(top.name):"—"}</b><span>🥇 Top student</span></div><div class="card stat"><b>${(S.teams.length&&teamBoard()[0].total>0)?esc(teamBoard()[0].name):"—"}</b><span>🏆 Current top team${S.teams.length&&teamBoard()[0].total>0?" · "+teamBoard()[0].total+" pts":""}</span></div></div>
+  ${(()=>{const t=today(),n=S.events.filter(e=>e.pub&&e.date&&e.date>=t).sort((a,b)=>a.date.localeCompare(b.date))[0];if(!n)return"";const d=Math.round((new Date(n.date)-new Date(t))/864e5);return `<div class="card" style="border-color:var(--a);margin-bottom:10px"><span class="pill">⏳ Next event</span><h3>${esc(n.name)}</h3><div class="mu">📅 ${esc(n.date)} ${esc(n.st||"")} ${n.venue?"· 📍 "+esc(n.venue):""}</div><div class="stat" style="margin-top:8px"><b>${d===0?"Today!":d+" day"+(d===1?"":"s")+" to go"}</b></div><div class="act"><button class="btn s" onclick="go('events')">View events</button></div></div>`})()}
+  ${(()=>{const t=teamBoard().filter(x=>x.total>0).slice(0,3);return t.length?`<div class="sec"><h2>Top teams</h2><button class="btn o s" onclick="go('leaderboard');flt.lb='team';render()">Team leaderboard</button></div>`+t.map((x,i)=>`<div class="card lb r${i+1}"><div class="rk">${["🥇","🥈","🥉"][i]}</div><div class="av">${esc(x.name[0].toUpperCase())}</div><div><b>${esc(x.name)}</b></div><div class="pts">${x.total}</div></div>`).join(""):""})()}
+  ${b.length?`<div class="sec"><h2>Top students</h2><button class="btn o s" onclick="go('leaderboard')">Full leaderboard</button></div>`+b.slice(0,3).map(s=>`<div class="card lb r${s.rank}"><div class="rk">${["🥇","🥈","🥉"][s.rank-1]}</div>${av(s)}<div><b>${esc(s.name)}</b><div class="mu">${esc(s.sid||"")}${s.team?" · "+esc(s.team):""}</div></div><div class="pts">${s.total}</div></div>`).join(""):""}
+  ${V.newsList(S.news.filter(n=>n.pub).slice(0,3),"Latest announcements")}`},
+ leaderboard(){const tm=flt.lb==="team",tabs=`<div class="bar" style="margin-bottom:12px"><button class="btn ${tm?"o":""} s" onclick="flt.lb='';flt.q='';render(1)">Students</button><button class="btn ${tm?"":"o"} s" onclick="flt.lb='team';flt.q='';render(1)">Teams</button></div>`;
+  if(tm){const act=S.students.filter(x=>x.status==="active"),tl=S.teams.map(t=>{const m=act.filter(x=>x.team===t.name);return {...t,n:m.length,total:m.reduce((a,x)=>a+total(x.id),0)}}).sort((a,b)=>b.total-a.total||a.name.localeCompare(b.name)||a.id.localeCompare(b.id)).map((t,i)=>({...t,rank:i+1})).filter(t=>qm(t,["name"]));
+   return `<div class="sec"><h2>Leaderboard</h2></div>${tabs}${search("Search team")}${tl.length?tl.map(t=>`<div class="card lb r${t.rank}"><div class="rk">${t.rank<4?["🥇","🥈","🥉"][t.rank-1]:t.rank}</div><div class="av">${esc((t.name||"?")[0].toUpperCase())}</div><div><b>${esc(t.name)}</b><div class="mu">${t.n} member${t.n===1?"":"s"}</div></div><div class="pts">${t.total}</div></div>`).join(""):empty("No teams yet.",`<button class="btn" onclick="go('teams')">Create teams</button>`)}`}
+  const b=board().filter(s=>qm(s,["name","sid","team"]));
+  return `<div class="sec"><h2>Leaderboard</h2></div>${tabs}${search("Search name, ID or team")}${b.length?b.map(s=>`<div class="card lb r${s.rank}"><div class="rk">${s.rank<4?["🥇","🥈","🥉"][s.rank-1]:s.rank}</div>${av(s)}<div><b>${esc(s.name)}</b><div class="mu">${esc(s.sid||"")}${s.team?" · "+esc(s.team):""}</div></div><div class="pts">${s.total}</div></div>`).join(""):empty("No ranked students yet.",`<button class="btn" onclick="go('students')">Add students</button>`)}`},
+ events(){const l=pubOnly(S.events).filter(e=>qm(e,["name","cat","venue"])&&(!flt.cat||e.cat===flt.cat)).sort((a,b)=>(a.date||"").localeCompare(b.date||""));
+  return `<div class="sec"><h2>Events</h2>${addBtn("events","Add event")}</div><div class="bar"><input id="q" placeholder="Search events" value="${esc(flt.q||"")}" oninput="flt.q=this.value;render(1)"><select onchange="flt.cat=this.value;render(1)">${catOpts().map(o=>`<option value="${esc(o[0])}" ${flt.cat===o[0]?"selected":""}>${o[0]?esc(o[1]):"All categories"}</option>`)}</select></div>
+  <div class="grid">${l.map(e=>`<div class="card">${e.img?`<img class="im" src="${img(e.img)}">`:""}<h3>${esc(e.name)}</h3>${e.cat?`<span class="pill">${esc(e.cat)}</span>`:""}${admin?`<span class="pill ${e.pub?"ok":"no"}">${e.pub?"Published":"Draft"}</span>`:""}<p class="mu">${esc(e.desc)}</p><div class="mu">📅 ${esc(e.date||"TBA")} ${esc(e.st||"")}${e.en?"–"+esc(e.en):""}<br>📍 ${esc(e.venue||"TBA")}${e.pts?`<br>⭐ ${e.pts} pts`:""}${e.max?`<br>👥 Max ${e.max}`:""}</div><div class="act"><button class="btn o s" onclick="cands('${e.id}')">👥 Participants (${S.cands.filter(c=>c.ev===e.id).length})</button></div>${acts("events",e.id)}</div>`).join("")}</div>${l.length?"":empty("No events yet.",`<button class="btn" onclick="edit('events')">Create an event</button>`)}`},
+ gallery(){const l=pubOnly(S.gallery).filter(g=>qm(g,["title","cap"])&&(!flt.cat||g.cat===flt.cat)).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  return `<div class="sec"><h2>Gallery</h2>${addBtn("gallery","Upload images")}</div><div class="bar"><input id="q" placeholder="Search gallery" value="${esc(flt.q||"")}" oninput="flt.q=this.value;render(1)"><select onchange="flt.cat=this.value;render(1)">${catOpts().map(o=>`<option value="${esc(o[0])}" ${flt.cat===o[0]?"selected":""}>${o[0]?esc(o[1]):"All categories"}</option>`)}</select></div>
+  <div class="grid g">${l.map(g=>`<div class="card"><img class="im" loading="lazy" onerror="this.removeAttribute('src');this.style.background='var(--gl)'" src="${img(g.img)}" onclick="lightbox('${esc(g.img)}')" style="cursor:zoom-in"><div class="cap"><b>${esc(g.title)}</b>${admin?`<span class="pill ${g.pub?"ok":"no"}">${g.pub?"Published":"Hidden"}</span>`:""}<div class="mu">${esc(g.cap)}</div>${acts("gallery",g.id)}</div></div>`).join("")}</div>${l.length?"":empty("The gallery is empty.",`<button class="btn" onclick="edit('gallery')">Upload your first image</button>`)}`},
+ newsList(l,t){return `<div class="sec"><h2>${t}</h2>${addBtn("news","Add")}</div>${l.length?l.map(n=>`<div class="card" style="margin:10px 0;${n.prio==="high"?"border-color:#f59e0b":""}"><h3>${esc(n.title)}</h3><span class="pill">${esc(n.date||"")}</span>${n.prio==="high"?'<span class="pill no">Important</span>':""}${admin?`<span class="pill ${n.pub?"ok":"no"}">${n.pub?"Published":"Draft"}</span>`:""}${n.img?`<img class="prev" src="${img(n.img)}" style="display:block">`:""}<p class="mu">${esc(n.desc)}</p>${acts("news",n.id)}</div>`).join(""):empty("No announcements.",`<button class="btn" onclick="edit('news')">Post one</button>`)}`},
+ news(){return V.newsList(pubOnly(S.news).filter(n=>qm(n,["title","desc"])).sort((a,b)=>(b.date||"").localeCompare(a.date||"")),"Announcements")},
+ students(){
+  const teams=[...new Set(S.students.map(s=>s.team).filter(Boolean))];const l=S.students.filter(s=>(flt.arch?s.status==="deleted":s.status!=="deleted")&&qm(s,["name","sid","user","team"])&&(!flt.team||s.team===flt.team)&&(!flt.st||s.status===flt.st));
+  return `<div class="sec"><h2>${flt.arch?"Archived students":"Students"}</h2><div class="bar" style="flex:none">${addBtn("students","Add student")}<button class="btn o s" onclick="flt.arch=!flt.arch;render(1)">${flt.arch?"Back":"Archived"}</button></div></div>
+  <div class="bar"><input id="q" placeholder="Search name or ID" value="${esc(flt.q||"")}" oninput="flt.q=this.value;render(1)"><select onchange="flt.team=this.value;render(1)"><option value="">All teams</option>${teams.map(d=>`<option ${flt.team===d?"selected":""}>${esc(d)}</option>`)}</select><select onchange="flt.st=this.value;render(1)"><option value="">Any status</option><option value="active" ${flt.st==="active"?"selected":""}>Active</option><option value="inactive" ${flt.st==="inactive"?"selected":""}>Inactive</option></select></div>
+  <div class="grid">${l.map(s=>`<div class="card"><div style="display:flex;gap:12px;align-items:center">${av(s)}<div><b>${esc(s.name)}</b><div class="mu">${esc(s.sid)}${s.team?" · "+esc(s.team):""}</div></div></div><div style="margin-top:8px"><span class="pill ${s.status==="active"?"ok":"no"}">${esc(s.status)}</span><span class="pill">⭐ ${total(s.id)}</span></div><div class="mu">${esc([s.cls,s.sec].filter(Boolean).join(" · "))}</div><div class="act">${s.status==="deleted"?`<button class="btn o s" onclick="restore('${s.id}')">Restore</button><button class="btn d s" onclick="purge('${s.id}')">Delete forever</button>`:`<button class="btn o s" onclick="edit('students',S.students.find(x=>x.id==='${s.id}'))">Edit</button><button class="btn d s" onclick="ask('students',S.students.find(x=>x.id==='${s.id}'))">Delete</button>`}</div></div>`).join("")}</div>${l.length?"":empty("No students here yet.",`<button class="btn" onclick="edit('students')">Add a student</button>`)}`},
+ points(){const l=S.points.filter(p=>(!flt.stu||p.stu===flt.stu)&&qm({...p,n:sName(p.stu)},["n","reason","desc"])).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  return `<div class="sec"><h2>Point transactions</h2>${addBtn("points","Award points")}</div><div class="bar"><input id="q" placeholder="Search reason or student" value="${esc(flt.q||"")}" oninput="flt.q=this.value;render(1)"><select onchange="flt.stu=this.value;render(1)"><option value="">All students</option>${S.students.map(s=>`<option value="${s.id}" ${flt.stu===s.id?"selected":""}>${esc(s.name)}</option>`)}</select></div>
+  ${l.map(p=>`<div class="card lb"><div class="rk" style="color:${p.pts<0?"#fb7185":"#34d399"}">${p.pts>0?"+":""}${p.pts}</div><div><b>${esc(sName(p.stu))}</b><div class="mu">${esc(p.reason)} · ${esc(p.date||"")}</div></div><div class="pts">${acts("points",p.id).replace('class="act"','class="act" style="margin:0"')}</div></div>`).join("")}${l.length?"":empty("No point transactions yet.")}`},
+ teams(){return `<div class="sec"><h2>Teams</h2>${addBtn("teams","Add team")}</div><div class="grid">${S.teams.map(t=>`<div class="card"><b>${esc(t.name)}</b><div class="mu">${S.students.filter(s=>s.team===t.name&&s.status!=="deleted").length} members · ⭐ ${S.students.filter(s=>s.team===t.name&&s.status!=="deleted").reduce((a,s)=>a+total(s.id),0)} pts</div>${acts("teams",t.id)}</div>`).join("")}</div>${S.teams.length?"":empty("No teams yet. Create your first team.",`<button class="btn" onclick="edit('teams')">Add team</button>`)}`},
+ cats(){return `<div class="sec"><h2>Categories</h2>${addBtn("cats","Add category")}</div><div class="grid">${S.cats.map(c=>`<div class="card"><b>${esc(c.name)}</b>${acts("cats",c.id)}</div>`).join("")}</div>${S.cats.length?"":empty("No categories yet.")}`},
+ admin(){return `<div class="card" style="max-width:420px;margin:50px auto;text-align:center"><h2>Admin login</h2><p class="mu">Enter the admin password to manage students, points and the gallery.</p><form onsubmit="unlock(event)"><input id="pw" type="password" placeholder="Password" autocomplete="current-password" required><div class="row"><button class="btn" style="width:100%">Unlock admin</button></div></form></div>`},
+ me(){const m=S.me;if(!m)return `<div class="card" style="max-width:420px;margin:50px auto;text-align:center"><h2>Student login</h2><p class="mu">See your own points, rank and history.</p><form onsubmit="stuLogin(event)"><label style="text-align:left">Student ID<input id="sid" required></label><label style="text-align:left">Access ID / username (if you were given one)<input id="acc"></label><button class="btn" style="width:100%">View my profile</button></form></div>`;
+  const b=board(),r=b.find(x=>x.id===m.id),h=S.points.filter(p=>p.stu===m.id).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  return `<div class="card lb">${av(m)}<div><h3>${esc(m.name)}</h3><div class="mu">${esc(m.sid)} · ${esc([m.team,m.cls,m.sec].filter(Boolean).join(" · "))}</div></div><button class="btn o s" style="margin-left:auto" onclick="S.me=null;render()">Log out</button></div><div class="stats"><div class="card stat"><b>${total(m.id)}</b><span>Total points</span></div><div class="card stat"><b>${r?"#"+r.rank:"—"}</b><span>Current rank</span></div><div class="card stat"><b>${h.length}</b><span>Transactions</span></div></div><h3>Point history</h3>${h.map(p=>`<div class="card lb"><div class="rk" style="color:${p.pts<0?"#fb7185":"#34d399"}">${p.pts>0?"+":""}${p.pts}</div><div><b>${esc(p.reason)}</b><div class="mu">${esc(p.date||"")} ${esc(p.desc||"")}</div></div></div>`).join("")||empty("No points yet.")}`},
+ dash(){const b=board();return `<div class="sec"><h2>Dashboard</h2></div><div class="stats">${[["Students",S.students.filter(s=>s.status!=="deleted").length],["Active",S.students.filter(s=>s.status==="active").length],["Inactive",S.students.filter(s=>s.status==="inactive").length],["Events",S.events.length],["Points awarded",S.points.reduce((a,p)=>a+(+p.pts||0),0)],["Gallery",S.gallery.length],["Announcements",S.news.length],["Top student",b[0]?b[0].name:"—"],["Current top team",(S.teams.length&&teamBoard()[0].total>0)?teamBoard()[0].name:"—"]].map(x=>`<div class="card stat"><b>${esc(x[1])}</b><span>${x[0]}</span></div>`).join("")}</div><div class="sec"><h3>Recent activity</h3>${(S.logs||[]).length?`<button class="btn d s" onclick="clearLogs()">Clear all</button>`:""}</div>${(S.logs||[]).slice(0,12).map(l=>`<div class="card lb" style="margin:6px 0;padding:10px 16px"><div>${esc(l.a)} <span class="mu">· ${new Date(l.t).toLocaleString()}</span></div><button class="btn d s" style="margin-left:auto" onclick="delLog('${l.id}')">Delete</button></div>`).join("")||empty("No activity yet.")}`},
+ settings(){const s=S.settings;return `<div class="sec"><h2>Site settings</h2><button class="btn s" onclick="editSettings()">Edit settings</button></div><div class="card"><p><b>${esc(s.name||"(no name)")}</b></p><p class="mu">${esc(s.contact||"")} ${esc(s.social||"")}</p></div><div class="card" style="margin-top:14px"><b>Admin password</b><p class="mu">Change the password used to unlock this admin page.</p><button class="btn s" onclick="changePw()">Change admin password</button></div>`}
+};
+function editSettings(){const s={...S.settings};form("Site settings",[{k:"name",l:"Festival name"},{k:"logo",l:"Logo (opening screen — any size, auto-fitted to a fixed square)",t:"img",rm:1},{k:"banner",l:"Banner image (wide — any size, auto-fitted to a fixed 16:6 frame)",t:"img",rm:1},{k:"contact",l:"Contact info"},{k:"social",l:"Social links"}],s,async o=>{await db.collection("settings").doc("site").set(o);log("Settings changed")})}
+const delLog=id=>confirmBox("Delete this activity entry?",async()=>{try{await db.collection("logs").doc(id).delete();toast("Activity deleted")}catch(e){toast(e.message||"Delete failed",1)}});
+const clearLogs=()=>confirmBox("Delete ALL recent activity entries?",async()=>{const all=[...(S.logs||[])];S.logs=[];render(1);toast("Clearing…");const rs=await Promise.allSettled(all.map(l=>db.collection("logs").doc(l.id).delete()));const bad=rs.filter(r=>r.status==="rejected");if(bad.length)toast(bad.length+" entries could not be deleted: "+((bad[0].reason&&bad[0].reason.message)||"permission denied"),1);else toast("Activity cleared")});
+function cands(ev){const e=S.events.find(x=>x.id===ev);if(!e)return;const l=S.cands.filter(c=>c.ev===ev).map(c=>({c,s:c.stu?S.students.find(s=>s.id===c.stu):null})).filter(x=>x.c.name||(x.s&&x.s.status!=="deleted"));
+ modal(`<h3>${esc(e.name)} — Participants</h3>${l.map(x=>{const n=x.c.name||x.s.name;return `<div class="card lb" style="padding:10px;margin:6px 0">${x.s?av(x.s):`<div class="av">${esc(n[0].toUpperCase())}</div>`}<div><b>${esc(n)}</b>${x.s?`<div class="mu">${esc(x.s.sid)}${x.s.team?" · "+esc(x.s.team):""}</div>`:""}</div>${admin?`<button class="btn d s" style="margin-left:auto" onclick="rmCand('${x.c.id}','${ev}')">Remove</button>`:""}</div>`}).join("")||empty("No participants added yet.")}${admin?`<label>Add participant name(s) — separate several with commas<input id="pn" list="sl" autocomplete="off" placeholder="Type a name" onkeydown="if(event.key==='Enter'){event.preventDefault();addCand('${ev}')}"></label><datalist id="sl">${S.students.filter(s=>s.status==="active").map(s=>`<option value="${esc(s.name)}">`).join("")}</datalist><button class="btn s" onclick="addCand('${ev}')">+ Add participant</button>`:""}<div class="row"><button class="btn o" data-x>Close</button></div>`)}
+async function addCand(ev){const names=$("#pn").value.split(/[,\n]/).map(x=>x.trim()).filter(Boolean);if(!names.length)return toast("Type a participant name",1);const have=S.cands.filter(c=>c.ev===ev).map(c=>(c.name||"").toLowerCase());let n=0;for(const nm of names){if(have.includes(nm.toLowerCase()))continue;have.push(nm.toLowerCase());const m=S.students.find(x=>x.status==="active"&&x.name.toLowerCase()===nm.toLowerCase());await save("cands",uid(),{ev,name:nm,stu:m?m.id:""},null);n++}if(n)log(n+" participant(s) added");setTimeout(()=>cands(ev),500)}
+function rmCand(id,ev){confirmBox("Remove this participant from the event?",async()=>{await del("cands",id,"Participant removed");setTimeout(()=>cands(ev),500)})}
+function teamBoard(){const act=S.students.filter(x=>x.status==="active");return S.teams.map(t=>({...t,total:act.filter(x=>x.team===t.name).reduce((a,x)=>a+total(x.id),0)})).sort((a,b)=>b.total-a.total||a.name.localeCompare(b.name)||a.id.localeCompare(b.id))}
+let want="dark";const ap=()=>{if(document.documentElement.dataset.theme!==want)document.documentElement.dataset.theme=want};new MutationObserver(ap).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});ap();
+function cp(t){try{navigator.clipboard.writeText(t).then(()=>toast("Copied: "+t),()=>toast("Press and hold the text to copy it"))}catch(e){toast("Press and hold the text to copy it")}}
+function theme(){want=want==="dark"?"light":"dark";ap()}
+function rmImg(b){const l=b.parentNode;l.querySelector("input[type=hidden]").value="1";l.querySelectorAll("img.cur").forEach(i=>i.hidden=true);b.hidden=true;l.querySelector(".rmn").hidden=false}
+const restore=id=>save("students",id,{...S.students.find(s=>s.id===id),status:"inactive"},"Student restored");
+const purge=id=>confirmBox("Permanently delete this archived student? Their point history will remain but show as removed.",()=>del("students",id,"Student permanently deleted"));
+function lightbox(id){modal(`<img src="${img(id)}" style="width:100%;border-radius:14px"><div class="row"><button class="btn o" data-x>Close</button></div>`)}
+async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+const DEF="240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9";
+async function curHash(){try{const d=await db.collection("auth").doc("admin").get();return d.exists&&d.data().h?d.data().h:DEF}catch(e){return DEF}}
+function changePw(){modal(`<h3>Change admin password</h3><form id="pf"><label>Current password<input id="p0" type="password" required></label><label>New password (min 8 characters)<input id="p1" type="password" minlength="8" required></label><label>Confirm new password<input id="p2" type="password" required></label><div class="row"><button type="button" class="btn o" data-x>Cancel</button><button class="btn">Update password</button></div></form>`);
+ $("#pf").onsubmit=async e=>{e.preventDefault();if(await sha($("#p0").value)!==await curHash())return toast("Current password is wrong",1);if($("#p1").value!==$("#p2").value)return toast("New passwords do not match",1);try{await db.collection("auth").doc("admin").set({h:await sha($("#p1").value),t:Date.now()});closeM();log("Admin password changed")}catch(er){toast(er.message||"Could not save password",1)}}}
+async function unlock(e){e.preventDefault();if(await sha($("#pw").value)===await curHash()){admin=true;try{sessionStorage.setItem("adm","1")}catch(x){}tab="dash";flt={};render();if(!isEd)toast("Admin unlocked",0)}else toast("Wrong password",1)}
+function lock(){admin=false;try{sessionStorage.removeItem("adm")}catch(x){}go("home")}
+function stuLogin(e){e.preventDefault();const id=$("#sid").value.trim(),ac=$("#acc").value.trim(),s=S.students.find(x=>x.sid===id&&x.status==="active");if(!s||(s.user&&s.user!==ac))return toast("Student ID or access ID is incorrect",1);S.me=s;render()}
+const go=t=>{tab=t;flt={};render()};
+const t0=Date.now();
+function splash(){const e=$("#splash");if(!e)return;const s=S.settings;const k=(s.logo||"")+"|"+(s.name||"");if(e.dataset.k!==k){e.dataset.k=k;$("#sp").innerHTML=(s.logo?`<img src="${img(s.logo)}">`:"")+`<h1>${esc(s.name||"")}</h1>`}
+ if(ready&&Date.now()-t0>2300){e.classList.add("out");setTimeout(()=>e.remove(),800)}}
+setInterval(splash,400);setTimeout(()=>{const e=$("#splash");if(e){e.classList.add("out");setTimeout(()=>e.remove(),800)}},5000);
+function render(keep){
+ const pub=[["home","Home"],["leaderboard","Leaderboard"],["events","Events"],["gallery","Gallery"],["news","News"],["me","Student Login"]];
+ const adm=[["dash","Dashboard"],["students","Students"],["teams","Teams"],["points","Points"],["gallery","Gallery"],["events","Events"],["news","Announcements"],["cats","Categories"],["settings","Settings"]];
+ const s=S.settings;document.title=s.name||"Festival Hub";
+ $("#nav").innerHTML=`<div class="brand">✦ ${esc(s.name||"Festival")}</div>`+(admin?adm:pub).map(t=>`<button class="tab ${tab===t[0]?"on":""}" onclick="go('${t[0]}')">${t[1]}</button>`).join("")+(admin?`<button class="tab" onclick="lock()">Exit admin</button>`:`<button class="tab ${tab==="admin"?"on":""}" onclick="go('admin')">🔒 Admin</button>`)+`<button class="tab" title="Light / dark" onclick="theme()">🌓</button>`;
+
+ const fo=document.activeElement&&document.activeElement.id==="q",pos=fo?document.activeElement.selectionStart:0;
+ $("#app").innerHTML=ready?(V[tab]||V.home)():`<div class="sk"></div><br><div class="sk"></div>`;
+ if(fo){const q=$("#q");if(q){q.focus();q.setSelectionRange(pos,pos)}}
+}
+async function init(){
+ render();
+ try{const u=await claude.use("user");isEd=!!(u&&u.canEdit&&u.canEdit());try{admin=sessionStorage.getItem("adm")==="1"}catch(x){}if(admin)tab="dash";db=await claude.use("db");assets=await claude.use("assets")}catch(e){}
+ if(!db){ready=true;$("#app").innerHTML=empty("Sign in to claude.ai to load festival data.");return}
+ const map={};
+ [...COLS,"logs"].forEach(c=>db.collection(c).onSnapshot(sn=>{
+  const arr=sn.docs.map(d=>({...d.data(),id:d.id}));
+  if(c==="settings"){S.settings=arr.find(x=>x.id==="site")||{}}else if(c==="logs"){S.logs=arr.sort((a,b)=>b.t-a.t)}else S[c]=arr;
+  map[c]=1;if(map.settings&&map.students&&map.points&&map.events&&map.gallery&&map.news&&map.cats){ready=true}
+  if(!document.querySelector(".md"))render(1)},e=>{toast("Could not load "+c,1);ready=true;render()}));
+ setTimeout(()=>{ready=true;render(1)},2500)
+}
+
+// Standalone browser adapter: persistent localStorage database + local image data URLs.
+(function(){
+ const PREFIX="festival_hub_v1:", listeners={};
+ const read=c=>{try{return JSON.parse(localStorage.getItem(PREFIX+c)||"{}")}catch(e){return {}}};
+ const notify=c=>{const all=read(c),docs=Object.entries(all).map(([id,data])=>({id,data:()=>data}));(listeners[c]||[]).slice().forEach(fn=>fn({docs}))};
+ const collection=c=>({
+  doc:id=>({
+   set:async data=>{const all=read(c);all[id]={...data};localStorage.setItem(PREFIX+c,JSON.stringify(all));notify(c)},
+   delete:async()=>{const all=read(c);delete all[id];localStorage.setItem(PREFIX+c,JSON.stringify(all));notify(c)},
+   get:async()=>{const all=read(c);return {exists:Object.prototype.hasOwnProperty.call(all,id),data:()=>all[id]||{}}}
+  }),
+  onSnapshot:(fn)=>{(listeners[c]||(listeners[c]=[])).push(fn);notify(c);return ()=>{listeners[c]=listeners[c].filter(x=>x!==fn)}}
+ });
+ window.claude={use:async kind=>{
+  if(kind==="user")return {canEdit:()=>true};
+  if(kind==="db")return {collection};
+  if(kind==="assets")return {
+   upload:async file=>({id:await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(String(r.result));r.onerror=reject;r.readAsDataURL(file)})}),
+   delete:async()=>{}
+  };
+  throw new Error("Unsupported service");
+ }};
+})();
+
+init();
+(function(){if(!window.THREE||matchMedia("(prefers-reduced-motion:reduce)").matches)return;try{
+const cv=document.getElementById("bg"),r=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});r.setPixelRatio(Math.min(devicePixelRatio,2));
+const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(60,1,.1,300);cam.position.set(0,7,22);
+const mob=innerWidth<700,X=mob?60:130,Z=mob?36:70,SP=.62,n=X*Z,pos=new Float32Array(n*3),col=new Float32Array(n*3);
+for(let i=0;i<X;i++)for(let j=0;j<Z;j++){const k=(i*Z+j)*3;pos[k]=(i-X/2)*SP;pos[k+2]=(j-Z/2)*SP*1.3-6}
+const g=new THREE.BufferGeometry();g.setAttribute("position",new THREE.BufferAttribute(pos,3));g.setAttribute("color",new THREE.BufferAttribute(col,3));
+const pts=new THREE.Points(g,new THREE.PointsMaterial({size:.14,vertexColors:true,transparent:true,opacity:.95,blending:THREE.AdditiveBlending,depthWrite:false}));sc.add(pts);const pm=pts.material;
+const A=new THREE.Color(0x6d28d9),B=new THREE.Color(0xec4899),C=new THREE.Color(0x22d3ee),tmp=new THREE.Color();
+const sg=new THREE.BufferGeometry(),sp2=new Float32Array(450*3);for(let i=0;i<450*3;i+=3){sp2[i]=(Math.random()-.5)*130;sp2[i+1]=Math.random()*45;sp2[i+2]=-40-Math.random()*30}sg.setAttribute("position",new THREE.BufferAttribute(sp2,3));
+const sm=new THREE.PointsMaterial({color:0xffffff,size:.16,transparent:true,opacity:.65,blending:THREE.AdditiveBlending,depthWrite:false});sc.add(new THREE.Points(sg,sm));
+let lastL=null,mx=0,my=0,t=0;addEventListener("pointermove",e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+function rs(){const w=innerWidth,h=innerHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}rs();addEventListener("resize",rs);
+(function an(){requestAnimationFrame(an);t+=.014;const L=document.documentElement.dataset.theme==="light";if(L!==lastL){lastL=L;pm.blending=L?THREE.NormalBlending:THREE.AdditiveBlending;pm.size=L?.2:.14;pm.opacity=L?.8:.95;pm.needsUpdate=true;sm.opacity=L?0:.65;A.set(L?0x7c3aed:0x6d28d9);B.set(L?0xdb2777:0xec4899);C.set(L?0x0891b2:0x22d3ee)}const p=g.attributes.position.array,c=g.attributes.color.array;
+for(let i=0;i<X;i++)for(let j=0;j<Z;j++){const k=(i*Z+j)*3,x=p[k],z=p[k+2],y=Math.sin(x*.35+t)*1.1+Math.sin(z*.4+t*1.3)*1.0+Math.sin((x+z)*.2+t*.7)*.9;p[k+1]=y;
+const h=(y+3)/6;if(h<.5)tmp.copy(A).lerp(B,h*2);else tmp.copy(B).lerp(C,(h-.5)*2);c[k]=tmp.r;c[k+1]=tmp.g;c[k+2]=tmp.b}
+g.attributes.position.needsUpdate=true;g.attributes.color.needsUpdate=true;
+cam.position.x+=(mx*5-cam.position.x)*.03;cam.position.y+=(7-my*3-cam.position.y)*.03;cam.lookAt(0,3,-4);r.render(sc,cam)})()}catch(e){}})();
+</script></body></html>
